@@ -56,6 +56,105 @@ To set up the database for this project, follow these steps:
     - **Table creation**: Creates tables such as `product`, `customer`, `address`, and sets up relationships between them (e.g., One-to-One, One-to-Many, Many-to-Many).
     - **Sample data insertion**: Inserts example data into the `product`, `customer`, and `address` tables.
 
+Project Directory Structure
+===========================
+
+.. code-block::
+
+    demo-spring-app/
+    ├── compose-mysql.yaml
+    ├── db-data
+    │   ├── mysql
+    │   └── product_table.sql
+    ├── mvnw
+    ├── mvnw.cmd
+    ├── mylog.log
+    ├── pom.xml
+    ├── README.rst
+    ├── src
+    │   ├── main
+    │   │   ├── java
+    │   │   │   └── com
+    │   │   │       └── example
+    │   │   │           └── demospringapp
+    │   │   │               ├── CacheConfiguration.java
+    │   │   │               ├── catfact
+    │   │   │               │   ├── CatFactController.java
+    │   │   │               │   ├── CatFactDTO.java
+    │   │   │               │   ├── CatFactResponse.java
+    │   │   │               │   └── CatFactService.java
+    │   │   │               ├── Configuration.java
+    │   │   │               ├── DemoSpringAppApplication.java
+    │   │   │               ├── exceptions
+    │   │   │               │   ├── ErrorMessages.java
+    │   │   │               │   ├── GlobalExceptionHandler.java
+    │   │   │               │   ├── ProductNotFoundException.java
+    │   │   │               │   └── ProductNotValidException.java
+    │   │   │               ├── ICommand.java
+    │   │   │               ├── IQuery.java
+    │   │   │               ├── mappings
+    │   │   │               │   ├── Address.java
+    │   │   │               │   ├── CustomerController.java
+    │   │   │               │   ├── Customer.java
+    │   │   │               │   └── ICustomerRepository.java
+    │   │   │               ├── product
+    │   │   │               │   ├── headers
+    │   │   │               │   │   └── HeaderController.java
+    │   │   │               │   ├── IProductRepository.java
+    │   │   │               │   ├── model
+    │   │   │               │   │   ├── ErrorResponse.java
+    │   │   │               │   │   ├── ProductDTO.java
+    │   │   │               │   │   ├── Product.java
+    │   │   │               │   │   └── UpdateProductCommand.java
+    │   │   │               │   ├── ProductController.java
+    │   │   │               │   ├── services
+    │   │   │               │   │   ├── CreateProductService.java
+    │   │   │               │   │   ├── DeleteProductService.java
+    │   │   │               │   │   ├── GetProductService.java
+    │   │   │               │   │   ├── GetProductsService.java
+    │   │   │               │   │   ├── SearchProductService.java
+    │   │   │               │   │   └── UpdateProductService.java
+    │   │   │               │   └── validators
+    │   │   │               │       └── ProductValidator.java
+    │   │   │               ├── security
+    │   │   │               │   ├── CreateNewUserController.java
+    │   │   │               │   ├── CustomUserDetailsService.java
+    │   │   │               │   ├── CustomUser.java
+    │   │   │               │   ├── ICustomUserRespository.java
+    │   │   │               │   ├── jwt
+    │   │   │               │   │   ├── JwtAuthenticationFilter.java
+    │   │   │               │   │   ├── JwtUtil.java
+    │   │   │               │   │   └── LoginController.java
+    │   │   │               │   ├── SecurityConfiguration.java
+    │   │   │               │   └── SecurityController.java
+    │   │   │               └── transaction
+    │   │   │                   ├── BankAccount.java
+    │   │   │                   ├── BankController.java
+    │   │   │                   ├── IBankAccountRepository.java
+    │   │   │                   ├── TransferDTO.java
+    │   │   │                   └── TransferService.java
+    │   │   └── resources
+    │   │       ├── application.properties
+    │   │       ├── static
+    │   │       └── templates
+    │   └── test
+    │       └── java
+    │           └── com
+    │               └── example
+    │                   └── demospringapp
+    │                       ├── DemoSpringAppApplicationTests.java
+    │                       └── product
+    │                           ├── services
+    │                           │   ├── CreateProductServiceTest.java
+    │                           │   ├── DeleteProductServiceTest.java
+    │                           │   ├── GetProductServiceTest.java
+    │                           │   ├── GetProductsServiceTest.java
+    │                           │   └── UpdateProductServiceTest.java
+    │                           └── validators
+    │                               └── ProductValidatorTest.java
+    └── target
+
+
 Main Components
 ---------------
 
