@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  mysql:
+    container_name: mysql-spring
+    image: mysql:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_USER=spring
+      - MYSQL_PASSWORD=secret
+      - MYSQL_DATABASE=finalexam
+    ports:
+      - '3307:3306'
+    volumes:
+      - './db-data/mysql:/var/lib/mysql'
+      # - './db-data/world.sql:/docker-entrypoint-initdb.d/world.sql'
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      retries: 5
+      start_period: 30s
+      timeout: 5s

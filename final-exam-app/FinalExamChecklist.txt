@@ -1,0 +1,62 @@
+Final Exam
+
+
+1. Product CRUD (create / read/ update / delete)
+   1. Required fields:
+      1. Id (use a GUID)
+      2. Name
+      3. Description
+      4. Price
+      5. Manufacturer
+      6. Category
+         1. Db must have a table for categories that are unique
+         2. Many products: 1 category mapping
+      7. Timestamp
+         1. Created
+         2. Updated
+      8. Region 
+         1. US/CAN
+            1. Enum
+   2. Read a product
+      1. Get a specific product by Id
+      2. Get a list of product by search
+         1. Product DTO 
+            1. (don’t send the timestamps)
+         2. Search criteria (query string param)
+            1. name / description
+            2. Category
+         3. Order by (query string param)
+            1. Price 
+            2. ABC order
+         4. Limit to the first 10 results
+            1. Expect a lot of products to be in there
+         5. Cache getProducts for performance for 5 min
+________________
+
+
+   3. Create / Update a product
+   1. Product Validator class
+   1.  use on both endpoints
+   2. Exception handling to send back good message to the UI -> can choose Spring’s default or your own custom response
+   2. External API integration 
+   1. No profanity in name or description
+   2. 3rd party API: Profanity Filter API
+   1. Will need API key
+   2. Profanity Filter API 
+   3. Send message back to UI if profanity present
+   4. Delete product by Id
+   1. Delete request -> only send the GUID
+   5. Logging
+   1. Add logging to each endpoint, each exception, each logical flow for the application
+   6. Testing
+   1. Business wants “thorough testing” 
+   2. Unit tests for each logical flow of the application
+   3. TDD (test driven development) 
+   1. Write the unit tests first then the code
+   7. Security
+   1. Only logged in users can create/update/delete products
+   2. But ALL users (not authenticated) can Get Products
+   3. Use JWTs & Security Filter Chain
+   4. 1 Role or 1 Authority saved in your database. 
+   1. Only the superuser can delete products but any authenticated user can create / update product
+

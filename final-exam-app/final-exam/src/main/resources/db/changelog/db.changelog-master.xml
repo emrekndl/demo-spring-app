@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <!-- Check if 'product' table does not exist before creating it -->
+    <changeSet id="1" author="test">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="product" />
+            </not>
+        </preConditions>
+        <createTable tableName="product">
+            <column name="id" type="char(36)">
+                <constraints primaryKey="true" />
+            </column>
+            <column name="name" type="varchar(60)">
+                <constraints nullable="false" />
+            </column>
+            <column name="description" type="varchar(100)">
+                <constraints nullable="false" />
+            </column>
+            <column name="price" type="bigint">
+                <constraints nullable="false" />
+            </column>
+            <column name="manufacturer" type="varchar(60)">
+                <constraints nullable="false" />
+            </column>
+            <column name="created_at" type="datetime">
+                <constraints nullable="false" />
+            </column>
+            <column name="updated_at" type="datetime">
+                <constraints nullable="false" />
+            </column>
+            <column name="region" type="varchar(60)">
+                <constraints nullable="false" />
+            </column>
+            <column name="category_id" type="integer">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!-- Check if 'category' table does not exist before creating it -->
+    <changeSet id="2" author="test">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="category" />
+            </not>
+        </preConditions>
+        <createTable tableName="category">
+            <column name="id" type="int">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="name" type="varchar(60)">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!-- Check if foreign key constraint does not exist before adding it -->
+    <changeSet id="3" author="test">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <foreignKeyConstraintExists
+                    foreignKeyName="fk_product_category" />
+            </not>
+        </preConditions>
+        <addForeignKeyConstraint
+            constraintName="fk_product_category"
+            baseTableName="product"
+            baseColumnNames="category_id"
+            referencedTableName="category"
+            referencedColumnNames="id" />
+    </changeSet>
+
+    <changeSet id="4" author="test">
+        <dropForeignKeyConstraint
+            constraintName="FK1mtsbur82frn64de7balymq9s"
+            baseTableName="product" />
+    </changeSet>
+
+</databaseChangeLog>
