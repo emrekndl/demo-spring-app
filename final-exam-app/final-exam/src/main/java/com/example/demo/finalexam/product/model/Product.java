@@ -3,6 +3,8 @@ package com.example.demo.finalexam.product.model;
 
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -34,6 +36,7 @@ public class Product extends BaseProduct {
     private String manufacturer;
     
     @ManyToOne(cascade = CascadeType.ALL)
+    @JsonBackReference
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
     
