@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 import com.example.demo.finalexam.IQuery;
 import com.example.demo.finalexam.exceptions.ProductNotFoundException;
 import com.example.demo.finalexam.product.IProductRepository;
+import com.example.demo.finalexam.product.dto.ProductDTO;
 import com.example.demo.finalexam.product.model.Product;
-import com.example.demo.finalexam.product.model.ProductDTO;
 
 @Service
 public class GetProductService implements IQuery<UUID, ProductDTO> {
