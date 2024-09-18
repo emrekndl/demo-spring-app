@@ -23,24 +23,35 @@ public class ProductSpecification implements Specification<Product> {
     public Predicate toPredicate(@NonNull Root<Product> root, @Nullable CriteriaQuery<?> query,
             @NonNull CriteriaBuilder criteriaBuilder) {
 
-        switch(searchCriteria.getOperation()) {
+        switch (searchCriteria.getOperation()) {
             case EQUALS:
+                if (searchCriteria.getKey().equals("category")) {
+                    return criteriaBuilder.equal(root.join("category").get("name"), searchCriteria.getValue());
+                }
                 return criteriaBuilder.equal(root.get(searchCriteria.getKey()), searchCriteria.getValue());
             case NOT_EQUALS:
                 return criteriaBuilder.notEqual(root.get(searchCriteria.getKey()), searchCriteria.getValue());
             case GREATER_THAN:
-                return criteriaBuilder.greaterThan(root.get(searchCriteria.getKey()), searchCriteria.getValue().toString());
+                return criteriaBuilder.greaterThan(root.get(searchCriteria.getKey()),
+                        searchCriteria.getValue().toString());
             case LESS_THAN:
-                return criteriaBuilder.lessThan(root.get(searchCriteria.getKey()), searchCriteria.getValue().toString());
+                return criteriaBuilder.lessThan(root.get(searchCriteria.getKey()),
+                        searchCriteria.getValue().toString());
             case CONTAINS:
-                return criteriaBuilder.like(criteriaBuilder.lower(root.get(searchCriteria.getKey())), "%" + searchCriteria.getValue().toString().toLowerCase() + "%");
+                return criteriaBuilder.like(criteriaBuilder.lower(root.get(searchCriteria.getKey())),
+                        "%" + searchCriteria.getValue().toString().toLowerCase() + "%");
             case STARTS_WITH:
-                return criteriaBuilder.like(root.get(searchCriteria.getKey()), searchCriteria.getValue().toString() + "%");
+                return criteriaBuilder.like(root.get(searchCriteria.getKey()),
+                        searchCriteria.getValue().toString() + "%");
             case ENDS_WITH:
-                return criteriaBuilder.like(root.get(searchCriteria.getKey()), "%" + searchCriteria.getValue().toString());
+                return criteriaBuilder.like(root.get(searchCriteria.getKey()),
+                        "%" + searchCriteria.getValue().toString());
             case NAME_OR_DESCRIPTION:
-                return criteriaBuilder.or(criteriaBuilder.like(criteriaBuilder.lower(root.get("name")), "%" + searchCriteria.getValue().toString().toLowerCase() + "%"),
-                        criteriaBuilder.like(criteriaBuilder.lower(root.get("description")), "%" + searchCriteria.getValue().toString().toLowerCase() + "%"));
+                return criteriaBuilder.or(
+                        criteriaBuilder.like(criteriaBuilder.lower(root.get("name")),
+                                "%" + searchCriteria.getValue().toString().toLowerCase() + "%"),
+                        criteriaBuilder.like(criteriaBuilder.lower(root.get("description")),
+                                "%" + searchCriteria.getValue().toString().toLowerCase() + "%"));
             default:
                 return null;
         }

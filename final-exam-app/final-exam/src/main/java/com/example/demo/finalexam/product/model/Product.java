@@ -3,6 +3,8 @@ package com.example.demo.finalexam.product.model;
 // import java.sql.Types;
 import java.util.UUID;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 // import org.hibernate.annotations.JdbcTypeCode;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -25,6 +27,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Table(name = "product")
+@DynamicUpdate
 public class Product extends BaseProduct {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -42,7 +45,8 @@ public class Product extends BaseProduct {
     @Column(name = "manufacturer", nullable = false, length = 60)
     private String manufacturer;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    // @ManyToOne(cascade = CascadeType.ALL)
     @JsonBackReference
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;

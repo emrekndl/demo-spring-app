@@ -85,4 +85,8 @@
     <!--     <modifyDataType tableName="product" columnName="id" newDataType="varchar(36)"/> -->
     <!-- </changeSet> -->
 
+    <changeSet id="5" author="test">
+        <addUniqueConstraint tableName="category" columnNames="name" />
+    </changeSet>
+
 </databaseChangeLog>

@@ -9,28 +9,32 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.finalexam.IQuery;
 import com.example.demo.finalexam.exceptions.ProductNotFoundException;
-import com.example.demo.finalexam.product.IProductRepository;
 import com.example.demo.finalexam.product.dto.ProductDTO;
 import com.example.demo.finalexam.product.model.Product;
+import com.example.demo.finalexam.product.repository.IProductRepository;
+import com.example.demo.finalexam.profanityfilter.ProfanityFilterService;
 
 @Service
 public class GetProductService implements IQuery<UUID, ProductDTO> {
     private IProductRepository productRepository;
+    private ProfanityFilterService profanityFilterService;
 
-    public GetProductService(IProductRepository productRepository) {
+    public GetProductService(IProductRepository productRepository, ProfanityFilterService profanityFilterService) {
         this.productRepository = productRepository;
+        this.profanityFilterService = profanityFilterService;
     }
 
     @Override
     public ResponseEntity<ProductDTO> execute(UUID id) {
         Optional<Product> product = productRepository.findById(id);
-        System.out.println("Optional Product: " + product);
 
         if (product.isPresent()) {
-            return ResponseEntity.status(HttpStatus.OK).body(new ProductDTO(product.get()));
+            Product filterProduct = profanityFilterService.execute(product.get());
+            return ResponseEntity.status(HttpStatus.OK).body(new ProductDTO(filterProduct));
         }
-        
+
         throw new ProductNotFoundException();
     }
 
 }
+

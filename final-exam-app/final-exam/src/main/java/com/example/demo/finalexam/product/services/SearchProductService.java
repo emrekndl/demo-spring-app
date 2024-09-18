@@ -10,10 +10,10 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.finalexam.IQuery;
 import com.example.demo.finalexam.helpers.SortingAndPagingHelper;
-import com.example.demo.finalexam.product.IProductRepository;
 import com.example.demo.finalexam.product.dto.ProductDTO;
 import com.example.demo.finalexam.product.dto.ProductSearchParams;
 import com.example.demo.finalexam.product.model.Product;
+import com.example.demo.finalexam.product.repository.IProductRepository;
 import com.example.demo.finalexam.product.specification.ProductSpecificationBuilder;
 import com.example.demo.finalexam.product.specification.SearchOperation;
 

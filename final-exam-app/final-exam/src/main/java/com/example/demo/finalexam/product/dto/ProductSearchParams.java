@@ -1,5 +1,7 @@
 package com.example.demo.finalexam.product.dto;
 
+// import com.example.demo.finalexam.product.model.Category;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,5 +18,6 @@ public class ProductSearchParams extends ProductQueryParams{
     private Double price;
     private String manufacturer;
     private String region;
+    // private Category category;
     private String category;
 }

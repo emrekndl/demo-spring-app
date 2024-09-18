@@ -25,11 +25,13 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "name", nullable = false, length = 60)
+    @Column(name = "name", nullable = false, length = 60, unique = true)
     private String name;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = false, mappedBy = "category")
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = false, mappedBy = "category")
+    // @OneToMany(cascade = CascadeType.ALL, orphanRemoval = false, mappedBy = "category")
     // @JsonManagedReference
     @JsonIgnore
-    private List<Product> products; 
+    private List<Product> products;
+
 }
