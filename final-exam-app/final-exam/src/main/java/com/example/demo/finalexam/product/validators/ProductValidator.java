@@ -29,12 +29,27 @@ public class ProductValidator {
             throw new ProductNotValidException(ErrorMessages.PRODUCT_NAME_CANNOT_BE_EMPTY.getMessage());
         }
 
+        if (product.getCategory() == null) {
+            throw new ProductNotValidException(ErrorMessages.PRODUCT_CATEGORY_CANNOT_BE_EMPTY.getMessage());
+        }
+        
+        if (product.getDescription() == null || product.getDescription().isEmpty()) {
+            throw new ProductNotValidException(ErrorMessages.PRODUCT_DESCRIPTION_CANNOT_BE_EMPTY.getMessage());
+        }
+        
+        if (product.getManufacturer() == null || product.getManufacturer().isEmpty()) {
+            throw new ProductNotValidException(ErrorMessages.PRODUCT_MANUFACTURER_CANNOT_BE_EMPTY.getMessage());
+        }
+
+        if (product.getRegion() == null) {
+            throw new ProductNotValidException(ErrorMessages.PRODUCT_REGION_CANNOT_BE_EMPTY.getMessage());
+        }
+        
         if (product.getPrice() < 0) {
             throw new ProductNotValidException(ErrorMessages.PRODUCT_PRICE_MUST_BE_POSITIVE.getMessage());
         }
 
     }
-
     public Category validateAndGetCategory(String categoryName) {
         return categoryRepository.findByName(categoryName).orElseThrow(() -> new CategoryNotFoundException());
     }
